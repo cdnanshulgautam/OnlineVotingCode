@@ -1,0 +1,33 @@
+﻿@using OnlineVoting.Application.Commands.Command
+@model CreateVoteGroupCommand
+
+@{
+    ViewData["Title"] = "Create Vote Group";
+}
+<h2>Create Vote Group</h2>
+<h4>VoteGroup</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div class="form-group">
+                <label asp-for="GroupName" class="control-label"></label>
+                <input asp-for="GroupName" class="form-control" />
+                <span asp-validation-for="GroupName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupDescription" class="control-label"></label>
+                <textarea asp-for="GroupDescription" class="form-control"></textarea>
+                <span asp-validation-for="GroupDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GroupImageUrl" class="control-label"></label>
+                <textarea asp-for="GroupImageUrl" class="form-control"></textarea>
+                <span asp-validation-for="GroupImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿
+@model VotingPageViewModel
+
+@{
+    ViewData["Title"] = "Vote";
+}
+<h2>Vote for your Prefered Group</h2>
+
+@if (Model.UserHasVoted)
+{
+    <div class="alert alert-info">
+        You have already cast you vote. Thank you for participating!
+    </div>
+}
+else
+{
+    <form asp-action="Vote" method="post">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Group Name</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var group in Model.VoteGroups)
+                {
+                    <tr>
+                        <td>@group.GroupName</td>
+                        <td>@group.GroupDescription</td>
+                        <td>
+                            <button type="submit" name="groupId" value="@group.GroupId" class="btn-primary" @(Model.UserHasVoted ? "disabled":"")>Vote</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+}

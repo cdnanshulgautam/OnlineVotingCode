@@ -1,0 +1,44 @@
+﻿@model IEnumerable<VoterViewModel>
+
+    @{
+        ViewData["Title"] = "All Voters";    
+    }
+    <h2>All Voters</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Full Name</th>
+                <th>Authorized</th>
+                <th>Locked Out</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var voter in Model)
+        {
+            <tr>
+                <td>@voter.Email</td>
+                <td>@voter.FullName</td>
+                <td>@voter.IsAuthorized</td>
+                <td>@voter.IsLockout</td>
+                <td>
+                    <form asp-action ="UpdateAuthorization" method="post" style="display:inline;">
+                        <input type="hidden" name="userId" value="@voter.UserId"/>
+                        <input type="hidden" name="isAuthorized" value="@(voter.IsAuthorized?"false":"true")"/>
+                        <button type="submit" class="btn @(voter.IsAuthorized ? "btn-warning" : "btn-success")">
+                            @(voter.IsAuthorized ? "Unauthorize" : "Authorize")
+                        </button>
+                    </form>
+                    <form asp-action="LockVoter" method="post" style="display:inline;">
+                        <input type="hidden" name="userId" value="@voter.UserId" />
+                        <button type="submit" name="lockUser" value="@(voter.IsLockout?"false":"true")"
+                            class="btn @(voter.IsLockout ? "btn-success":"btn-warning")">
+                            @(voter.IsLockout ? "Unlock" : "Lock")
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
